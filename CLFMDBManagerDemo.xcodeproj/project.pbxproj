@@ -1,0 +1,417 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		052945642159E3A60F0EEA74 /* libPods-CLFMDBManagerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E2F9D3BFF3F87BDB80F4BA /* libPods-CLFMDBManagerDemo.a */; };
+		992966E91FB2D37F004EE682 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 992966E81FB2D37F004EE682 /* AppDelegate.m */; };
+		992966EC1FB2D37F004EE682 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992966EB1FB2D37F004EE682 /* ViewController.m */; };
+		992966EF1FB2D37F004EE682 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992966ED1FB2D37F004EE682 /* Main.storyboard */; };
+		992966F11FB2D37F004EE682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 992966F01FB2D37F004EE682 /* Assets.xcassets */; };
+		992966F41FB2D37F004EE682 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992966F21FB2D37F004EE682 /* LaunchScreen.storyboard */; };
+		992966F71FB2D37F004EE682 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 992966F61FB2D37F004EE682 /* main.m */; };
+		992966FF1FB2D3C3004EE682 /* CLFMDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 992966FE1FB2D3C3004EE682 /* CLFMDBManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		992966E41FB2D37F004EE682 /* CLFMDBManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLFMDBManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		992966E71FB2D37F004EE682 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		992966E81FB2D37F004EE682 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		992966EA1FB2D37F004EE682 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		992966EB1FB2D37F004EE682 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		992966EE1FB2D37F004EE682 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		992966F01FB2D37F004EE682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		992966F31FB2D37F004EE682 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		992966F51FB2D37F004EE682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		992966F61FB2D37F004EE682 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		992966FD1FB2D3C3004EE682 /* CLFMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFMDBManager.h; sourceTree = "<group>"; };
+		992966FE1FB2D3C3004EE682 /* CLFMDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFMDBManager.m; sourceTree = "<group>"; };
+		EEC84470E84300B1459D0BBB /* Pods-CLFMDBManagerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLFMDBManagerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLFMDBManagerDemo/Pods-CLFMDBManagerDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		F0E2F9D3BFF3F87BDB80F4BA /* libPods-CLFMDBManagerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLFMDBManagerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFBE8C63BEEBB7BC1B14C283 /* Pods-CLFMDBManagerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLFMDBManagerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLFMDBManagerDemo/Pods-CLFMDBManagerDemo.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		992966E11FB2D37F004EE682 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				052945642159E3A60F0EEA74 /* libPods-CLFMDBManagerDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3203929D8CF4863EB95F75C4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EEC84470E84300B1459D0BBB /* Pods-CLFMDBManagerDemo.debug.xcconfig */,
+				FFBE8C63BEEBB7BC1B14C283 /* Pods-CLFMDBManagerDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		992966DB1FB2D37F004EE682 = {
+			isa = PBXGroup;
+			children = (
+				992966FD1FB2D3C3004EE682 /* CLFMDBManager.h */,
+				992966FE1FB2D3C3004EE682 /* CLFMDBManager.m */,
+				992966E61FB2D37F004EE682 /* CLFMDBManagerDemo */,
+				992966E51FB2D37F004EE682 /* Products */,
+				3203929D8CF4863EB95F75C4 /* Pods */,
+				A02A4147C782D9BAE4D0D466 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		992966E51FB2D37F004EE682 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				992966E41FB2D37F004EE682 /* CLFMDBManagerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		992966E61FB2D37F004EE682 /* CLFMDBManagerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				992966E71FB2D37F004EE682 /* AppDelegate.h */,
+				992966E81FB2D37F004EE682 /* AppDelegate.m */,
+				992966EA1FB2D37F004EE682 /* ViewController.h */,
+				992966EB1FB2D37F004EE682 /* ViewController.m */,
+				992966ED1FB2D37F004EE682 /* Main.storyboard */,
+				992966F01FB2D37F004EE682 /* Assets.xcassets */,
+				992966F21FB2D37F004EE682 /* LaunchScreen.storyboard */,
+				992966F51FB2D37F004EE682 /* Info.plist */,
+				992966F61FB2D37F004EE682 /* main.m */,
+			);
+			path = CLFMDBManagerDemo;
+			sourceTree = "<group>";
+		};
+		A02A4147C782D9BAE4D0D466 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0E2F9D3BFF3F87BDB80F4BA /* libPods-CLFMDBManagerDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		992966E31FB2D37F004EE682 /* CLFMDBManagerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 992966FA1FB2D37F004EE682 /* Build configuration list for PBXNativeTarget "CLFMDBManagerDemo" */;
+			buildPhases = (
+				EA33938568D630C38A47FE0B /* [CP] Check Pods Manifest.lock */,
+				992966E01FB2D37F004EE682 /* Sources */,
+				992966E11FB2D37F004EE682 /* Frameworks */,
+				992966E21FB2D37F004EE682 /* Resources */,
+				1FBA7CC44183509F37208C65 /* [CP] Embed Pods Frameworks */,
+				7743813D1F08B568D467391C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CLFMDBManagerDemo;
+			productName = CLFMDBManagerDemo;
+			productReference = 992966E41FB2D37F004EE682 /* CLFMDBManagerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		992966DC1FB2D37F004EE682 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = github/cjq002;
+				TargetAttributes = {
+					992966E31FB2D37F004EE682 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 992966DF1FB2D37F004EE682 /* Build configuration list for PBXProject "CLFMDBManagerDemo" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 992966DB1FB2D37F004EE682;
+			productRefGroup = 992966E51FB2D37F004EE682 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				992966E31FB2D37F004EE682 /* CLFMDBManagerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		992966E21FB2D37F004EE682 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				992966F41FB2D37F004EE682 /* LaunchScreen.storyboard in Resources */,
+				992966F11FB2D37F004EE682 /* Assets.xcassets in Resources */,
+				992966EF1FB2D37F004EE682 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FBA7CC44183509F37208C65 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CLFMDBManagerDemo/Pods-CLFMDBManagerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7743813D1F08B568D467391C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CLFMDBManagerDemo/Pods-CLFMDBManagerDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA33938568D630C38A47FE0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CLFMDBManagerDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		992966E01FB2D37F004EE682 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				992966EC1FB2D37F004EE682 /* ViewController.m in Sources */,
+				992966FF1FB2D3C3004EE682 /* CLFMDBManager.m in Sources */,
+				992966F71FB2D37F004EE682 /* main.m in Sources */,
+				992966E91FB2D37F004EE682 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		992966ED1FB2D37F004EE682 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				992966EE1FB2D37F004EE682 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		992966F21FB2D37F004EE682 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				992966F31FB2D37F004EE682 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		992966F81FB2D37F004EE682 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		992966F91FB2D37F004EE682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		992966FB1FB2D37F004EE682 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEC84470E84300B1459D0BBB /* Pods-CLFMDBManagerDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q6CDH23BU3;
+				INFOPLIST_FILE = CLFMDBManagerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjq002.CLFMDBManagerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		992966FC1FB2D37F004EE682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFBE8C63BEEBB7BC1B14C283 /* Pods-CLFMDBManagerDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q6CDH23BU3;
+				INFOPLIST_FILE = CLFMDBManagerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjq002.CLFMDBManagerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		992966DF1FB2D37F004EE682 /* Build configuration list for PBXProject "CLFMDBManagerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				992966F81FB2D37F004EE682 /* Debug */,
+				992966F91FB2D37F004EE682 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		992966FA1FB2D37F004EE682 /* Build configuration list for PBXNativeTarget "CLFMDBManagerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				992966FB1FB2D37F004EE682 /* Debug */,
+				992966FC1FB2D37F004EE682 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 992966DC1FB2D37F004EE682 /* Project object */;
+}
