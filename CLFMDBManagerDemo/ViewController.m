@@ -19,10 +19,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    // FIXME : 没有页面，看数据库文件，看打印数据  
+    // FIXME : 没有页面，看数据库文件，看打印数据
+    
+    // 必须调用，开始就创建数据表
+    [[CLFMDBManager manager] createTableArray:@[kFmdbTableName]
+                              primaryKeyArray:@[kPrimaryKey]];
     
     
-    /*
     // 插入随机数据
     [self insertRandomData];
     
@@ -31,9 +34,9 @@
     
     // 删除指定主键数据
     [self deleteData:@"54"];
-    */
     
-    [[CLFMDBManager manager] selectDataWithTable:kFmdbTableName conditions:@{@"Remarks":@"备注：15"} withBlock:^(NSArray<NSDictionary *> *resultSets) {
+    // 查询所有数据
+    [[CLFMDBManager manager] selectDataWithTable:kFmdbTableName conditions:nil withBlock:^(NSArray<NSDictionary *> *resultSets) {
         for (NSDictionary *result in resultSets) {
             NSLog(@"%@", result);
         }
@@ -48,21 +51,21 @@
 
 #pragma mark 插入随机数据
 - (void)insertRandomData {
-    NSDictionary *dictionary = @{@"Id" : [NSString stringWithFormat:@"%d", arc4random()% 100],
+    NSDictionary *dictionary = @{kPrimaryKey : [NSString stringWithFormat:@"%d", arc4random()% 100],
                                  @"Name" : [NSString stringWithFormat:@"名称：%d", arc4random()% 100],
                                  @"Remarks" : [NSString stringWithFormat:@"备注：%d", arc4random()% 100],
                                  };
     [[CLFMDBManager manager] insertDataWithTable:kFmdbTableName
-                              primaryKey:@"Id"
-                              dictionary:dictionary
-                               withBlock:^(FMDatabase *db, BOOL successful) {
-                                   if (successful) {
-                                       NSLog(@"成功");
-                                   }else{
-                                       NSLog(@"失败");
-                                   }
-                               }];
-    [[CLFMDBManager manager] selectDataWithTable:kFmdbTableName primaryKey:@"Id" primaryValue:@"36" withBlock:^(NSArray<NSDictionary *> *resultSets) {
+                                      primaryKey:kPrimaryKey
+                                      dictionary:dictionary
+                                       withBlock:^(FMDatabase *db, BOOL successful) {
+                                           if (successful) {
+                                               NSLog(@"成功");
+                                           }else{
+                                               NSLog(@"失败");
+                                           }
+                                       }];
+    [[CLFMDBManager manager] selectDataWithTable:kFmdbTableName primaryKey:kPrimaryKey primaryValue:@"36" withBlock:^(NSArray<NSDictionary *> *resultSets) {
         for (NSDictionary *result in resultSets) {
             NSLog(@"%@", result);
         }
@@ -71,11 +74,11 @@
 
 #pragma mark 更新指定主键数据
 - (void)updateData:(NSString *)primaryKey {
-    NSDictionary *dictionary = @{@"Id" : primaryKey,
+    NSDictionary *dictionary = @{kPrimaryKey : primaryKey,
                                  @"Name" : [NSString stringWithFormat:@"名称：%d", 80],
                                  @"Remarks" : [NSString stringWithFormat:@"备注：%d", 90],
                                  };
-    [[CLFMDBManager manager] updateDataWithTable:kFmdbTableName primaryKey:@"Id" dictionary:dictionary withBlock:^(FMDatabase *db, BOOL successful) {
+    [[CLFMDBManager manager] updateDataWithTable:kFmdbTableName primaryKey:kPrimaryKey dictionary:dictionary withBlock:^(FMDatabase *db, BOOL successful) {
         if (successful) {
             NSLog(@"成功");
         }else{
@@ -86,7 +89,7 @@
 
 #pragma mark 删除指定主键数据
 - (void)deleteData:(NSString *)primaryKey {
-    [[CLFMDBManager manager] deleteDataWithTable:kFmdbTableName primaryKey:@"Id" primaryValue:primaryKey withBlock:^(FMDatabase *db, BOOL successful) {
+    [[CLFMDBManager manager] deleteDataWithTable:kFmdbTableName primaryKey:kPrimaryKey primaryValue:primaryKey withBlock:^(FMDatabase *db, BOOL successful) {
         if (successful) {
             NSLog(@"成功");
         }else{
@@ -104,4 +107,6 @@
         }
     }];
 }
+
 @end
+

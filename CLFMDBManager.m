@@ -14,6 +14,10 @@
 #   define CLLog(...)
 #endif
 
+@interface CLFMDBManager ()
+@property (nonatomic, strong) NSString *filePath;
+@end
+
 @implementation CLFMDBManager
 
 #pragma mark - 初始化
@@ -29,13 +33,43 @@ static dispatch_once_t onceToken;
         instance = [super init];
         // 1.获得数据库文件的路径
         NSString *document = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSString *filename = [document stringByAppendingPathComponent:kFmdbName];
-        CLLog(@"FMDB数据库文件的路径：%@", filename);
-        // 2.得到数据库
-        FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:filename];
-        self.queue = queue;
+        self.filePath = [document stringByAppendingPathComponent:kFmdbName];
+        CLLog(@"FMDB数据库文件的路径：%@", self.filePath);
     });
     return instance;
+}
+
+
+#pragma mark 创建数据表（私有方法，内部调用）
+- (void)createTable:(NSString *)tableName
+         primaryKey:(NSString *)primaryKey
+{
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
+        // 4.当表不存在时创建新表（NOT EXISTS），只有一列（主键 列）
+        NSString *createTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' TEXT PRIMARY KEY)", tableName , primaryKey];
+        // 5.提交更新
+        BOOL result = [db executeUpdate:createTable];
+        if (result) {
+            CLLog(@"数据表%@创建成功", tableName);
+        }else{
+            CLLog(@"数据表%@创建失败", tableName);
+        }
+    }];
+}
+
+#pragma mark 创建表（必须调用，创建表）
+- (void)createTableArray:(NSArray<NSString*> *)tableNames primaryKeyArray:(NSArray<NSString*> *)primaryKeys {
+    if (tableNames.count != primaryKeys.count) {
+        return;
+    }
+    for (int i = 0; i < tableNames.count; i++) {
+        NSString *tableName = tableNames[i];
+        NSString *primaryKey = primaryKeys[i];
+        [self createTable:tableName primaryKey:primaryKey];
+    }
 }
 
 #pragma mark -
@@ -53,23 +87,21 @@ static dispatch_once_t onceToken;
     }
     
     __weak __typeof(self)weakSelf = self;
-    // 创建或者获取数据表
-    [self createTable:tableName primaryKey:primaryKey block:^(FMDatabase *db, BOOL successful) {
-        if (successful) {
-            if ([weakSelf haveTable:tableName primaryKey:primaryKey primaryValue:primaryValue database:db]) {
-                // MARK: 已存在该主键。执行更新数据方法
-                [weakSelf updateTable:tableName primaryKey:primaryKey primaryValue:primaryValue dictionary:dictionary database:db withBlock:block];
-            }else{
-                // MARK: 不存在该主键。执行插入数据方法
-                NSString *insertSql = [NSString stringWithFormat:
-                                       @"INSERT INTO '%@' ('%@') VALUES (?)",
-                                       tableName, primaryKey];
-                
-                [db executeUpdate:insertSql, primaryValue];
-                [weakSelf updateTable:tableName primaryKey:primaryKey primaryValue:primaryValue dictionary:dictionary database:db withBlock:block];
-            }
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
+        if ([weakSelf haveTable:tableName primaryKey:primaryKey primaryValue:primaryValue database:db]) {
+            // MARK: 已存在该主键。执行更新数据方法
+            [weakSelf updateTable:tableName primaryKey:primaryKey primaryValue:primaryValue dictionary:dictionary database:db withBlock:block];
         }else{
-            block(db, successful);
+            // MARK: 不存在该主键。执行插入数据方法
+            NSString *insertSql = [NSString stringWithFormat:
+                                   @"INSERT INTO '%@' ('%@') VALUES (?)",
+                                   tableName, primaryKey];
+            
+            [db executeUpdate:insertSql, primaryValue];
+            [weakSelf updateTable:tableName primaryKey:primaryKey primaryValue:primaryValue dictionary:dictionary database:db withBlock:block];
         }
     }];
 }
@@ -84,8 +116,10 @@ static dispatch_once_t onceToken;
         block(nil, NO);
         return;
     }
-    [self.queue inDatabase:^(FMDatabase *db) {
-        
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
         NSString *deleteSql = [NSString stringWithFormat:@"DELETE FROM '%@' WHERE %@ = '%@'", tableName, primaryKey, primaryValue];
         BOOL result = [db executeUpdate:deleteSql];
         if (block) {
@@ -98,7 +132,10 @@ static dispatch_once_t onceToken;
 - (void)deleteAllDataWithTable:(NSString *)tableName
                      withBlock:(CLFMDBBoolBlock)block
 {
-    [self.queue inDatabase:^(FMDatabase *db) {
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
         NSString *deleteSql = [NSString stringWithFormat:@"DELETE FROM '%@'", tableName];
         BOOL result = [db executeUpdate:deleteSql];
         block(db, result);
@@ -106,10 +143,11 @@ static dispatch_once_t onceToken;
 }
 
 #pragma mark 对指定数据表进行 表删除
-- (void)deleteTable:(NSString *)tableName
-          withBlock:(CLFMDBBoolBlock)block
-{
-    [self.queue inDatabase:^(FMDatabase *db) {
+- (void)deleteTable:(NSString *)tableName withBlock:(CLFMDBBoolBlock)block {
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
         NSString *deleteSql = [NSString stringWithFormat:@"DROP TABLE  '%@'", tableName];
         BOOL result = [db executeUpdate:deleteSql];
         block(db, result);
@@ -129,7 +167,10 @@ static dispatch_once_t onceToken;
         return;
     }
     __weak __typeof(self)weakSelf = self;
-    [self.queue inDatabase:^(FMDatabase *db) {
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
         if ([weakSelf haveTable:tableName primaryKey:primaryKey primaryValue:primaryValue database:db]) {
             // MARK: 已存在该主键。执行更新数据方法
             [weakSelf updateTable:tableName primaryKey:primaryKey primaryValue:primaryValue dictionary:dictionary database:db withBlock:block];
@@ -146,8 +187,10 @@ static dispatch_once_t onceToken;
                primaryValue:(NSString *)primaryValue
                   withBlock:(CLFMDBResultBlock)block
 {
-    [self.queue inDatabase:^(FMDatabase *db) {
-        
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
         NSString *selectSql = [NSString stringWithFormat:@"SELECT * FROM '%@' WHERE %@ = '%@'", tableName, primaryKey, primaryValue];
         FMResultSet *result = [db executeQuery:selectSql];
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
@@ -156,11 +199,11 @@ static dispatch_once_t onceToken;
                 [array addObject:result.resultDictionary];
             }
         } while ([result next]);
+        // FIXME: executeQuery查询之后要关闭查询
+        [result close];
         if (block) {
             block(array);
         }
-        // FIXME: executeQuery查询之后要关闭查询
-        [result close];
     }];
 }
 
@@ -169,7 +212,10 @@ static dispatch_once_t onceToken;
                  conditions:(NSDictionary *)conditions
                   withBlock:(CLFMDBResultBlock)block
 {
-    [self.queue inDatabase:^(FMDatabase *db) {
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
         
         NSString *selectSql = [NSString stringWithFormat:@"SELECT * FROM '%@'", tableName];
         NSString *conditionString = @"";
@@ -190,11 +236,11 @@ static dispatch_once_t onceToken;
                 [array addObject:result.resultDictionary];
             }
         } while ([result next]);
+        // FIXME: executeQuery查询之后要关闭查询
+        [result close];
         if (block) {
             block(array);
         }
-        // FIXME: executeQuery查询之后要关闭查询
-        [result close];
     }];
 }
 
@@ -203,7 +249,10 @@ static dispatch_once_t onceToken;
                       conditions:(NSDictionary *)conditions
                        withBlock:(CLFMDBResultBlock)block
 {
-    [self.queue inDatabase:^(FMDatabase *db) {
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
         NSString *selectSql = [NSString stringWithFormat:@"SELECT * FROM '%@'", tableName];
         NSString *conditionString = @"";
         if (conditions.allKeys.count > 0) {
@@ -223,13 +272,44 @@ static dispatch_once_t onceToken;
                 [array addObject:result.resultDictionary];
             }
         } while ([result next]);
+        // FIXME: executeQuery查询之后要关闭查询
+        [result close];
         if (block) {
             block(array);
         }
-        // FIXME: executeQuery查询之后要关闭查询
-        [result close];
     }];
 }
+/**
+ 对自定义进行Where 数据查询
+ 
+ @param tableName 数据表名称
+ @param block 查询结果回调
+ */
+-(void)selectDataWithTable:(NSString *)tableName
+         customWhereSqlite:(NSString *)customSqlite
+                 withBlock:(CLFMDBResultBlock)block
+{
+    // 2.得到数据库
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+    // 3.打开数据库
+    [queue inDatabase:^(FMDatabase *db) {
+        
+        NSString *selectSql = [NSString stringWithFormat:@"SELECT * FROM '%@' %@", tableName,customSqlite];// WHERE, customSqlite
+        FMResultSet *result = [db executeQuery:selectSql];
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+        do {
+            if (result.resultDictionary) {
+                [array addObject:result.resultDictionary];
+            }
+        } while ([result next]);
+        // FIXME: executeQuery查询之后要关闭查询
+        [result close];
+        if (block) {
+            block(array);
+        }
+    }];
+}
+
 
 #pragma mark -
 #pragma mark 对指定数据表进行 批量数据插入
@@ -264,24 +344,6 @@ static dispatch_once_t onceToken;
 }
 
 #pragma mark -
-#pragma mark 创建数据表（私有方法，内部调用）
-- (void)createTable:(NSString *)tableName
-         primaryKey:(NSString *)primaryKey
-              block:(CLFMDBBoolBlock)block
-{
-    // 3.打开数据库
-    [self.queue inDatabase:^(FMDatabase *db) {
-        // 4.当表不存在时创建新表（NOT EXISTS），只有一列（主键 列）
-        NSString *createTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' TEXT PRIMARY KEY)", tableName , primaryKey];
-        // 5.提交更新
-        BOOL result = [db executeUpdate:createTable];
-        
-        if (block) {
-            block(db, result);
-        }
-    }];
-}
-
 #pragma mark 判断数据表是否已经存在该主键（私有方法，内部调用）
 - (BOOL)haveTable:(NSString *)tableName
        primaryKey:(NSString *)primaryKey
@@ -360,4 +422,5 @@ static dispatch_once_t onceToken;
  5.删除列
  ALTER TABLE [方案名.]TABLE_NAME DROP COLUMN COLUMN_NAME;
  */
+
 

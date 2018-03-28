@@ -3,14 +3,19 @@
 ### 没有页面，看数据库文件，看打印数据。
 ### 直接添加FMDB的库，然后拷贝CLFMDBManager的两个文件即可使用。
 
+#### 必须创建数据库和数据表，使用以下方法：
 ```
-
+[[CLFMDBManager manager] createTableArray:@[表名...] primaryKeyArray:@[主键名...]];
+```
+    
+```
 // sqlFile  数据库文件（一个即可）
 static NSString *const kFmdbName = @"JYFMDB.sqlite";       //数据库的名称,可以定义成任何类型的文件
 
 
 // table    要多少个表，就定义多少个
 static NSString *const kFmdbTableName = @"cjqTable";        //xxx数据表
+
 
 /**
  注意：
@@ -19,11 +24,11 @@ static NSString *const kFmdbTableName = @"cjqTable";        //xxx数据表
  需要根据这个key来插入、查询、更新、删除数据
  每个表都有自己的主键，主键需要根据接口返回id来定义字段
  */
-static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
+static NSString *const kPrimaryKey = @"Id";           // xxx表的主键
 
-@interface CLFMDBManager : NSObject
 
-@property (nonatomic, strong) FMDatabaseQueue *queue;
+
+### 常用方法
 
 /**
  数据库操作：增（insert）、删（delete）、改（update）、查（select）。
@@ -32,6 +37,15 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
  @return sql单例
  */
 + (instancetype)manager;
+
+/**
+ 创建表（必须调用，创建表）
+ 
+ @param tableNames 数据表名称
+ @param primaryKeys 数据主键
+ */
+- (void)createTableArray:(NSArray<NSString*> *)tableNames
+         primaryKeyArray:(NSArray<NSString*> *)primaryKeys;
 
 #pragma mark - 单数据处理    增删改查操作
 /**
@@ -149,8 +163,6 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
  */
 - (void)deleteTable:(NSString *)tableName
           withBlock:(CLFMDBBoolBlock)block;
-
-@end
 
 
 ```
